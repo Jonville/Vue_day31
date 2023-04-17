@@ -1,0 +1,155 @@
+<html>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        table, td, th{
+            border : 1px solid #ccc;
+            font-size: 20px;
+            text-align: center;
+            border-collapse: collapse;
+            padding : 5px 20px;
+        }
+
+        #addfun {
+            width: 2px;
+        }
+    </style>
+</head>
+<body>      
+    <div id="app">
+        <div style="margin : 20px;">
+            <label>입력 : <input type="text" v-model="keyword"></label>
+            <select id="selectBox" v-model="selectItem">
+                <option id="0" value="">:: 전체 ::</option>
+                <option id="1" value="기계">기계</option>
+                <option id="2" value="전기전자">전기전자</option>
+                <option id="3" value="컴퓨터정보">컴퓨터정보</option>
+                <option id="4" value="ㅋㅋㅋ">ㅋㅋㅋ</option>
+            </select>
+            <button @click="fnSearch()">클릭</button>
+        </div>
+        <div class="table-list">
+            <table>                   
+                <thead>
+                    <tr>            
+                        <th scope="col"></th>                
+                        <th scope="col">No.</th>
+                        <th scope="col">학번</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">학과</th>
+                        <th scope="col">학년</th>
+                        <th scope="col">키</th>
+                        <th scope="col">몸무게</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in list" v-if="selectItem != ''" > 
+                        <template v-if="item.stu_dept == selectItem">
+                            <td><input type="checkbox" v-bind:value = "item.stu_no" v-model="checkList"></td>                 
+                            <td>{{index + 1}}</td> 
+                            <td>{{item.stu_no}}</td>
+                            <td>{{item.stu_name}}</td>
+                            <td>{{item.stu_dept}}</td>     
+                            <td>{{item.stu_grade}}</td>     
+                            <td>{{item.stu_height}}</td>     
+                            <td>{{item.stu_weight}}</td>
+                        </template>
+                    </tr>
+                    <tr v-else>
+                        <td><input type="checkbox" v-bind:value = "item.stu_no" v-model="checkList"></td>                 
+                        <td>{{index + 1}}</td> 
+                        <td>{{item.stu_no}}</td>
+                        <td>{{item.stu_name}}</td>
+                        <td>{{item.stu_dept}}</td>     
+                        <td>{{item.stu_grade}}</td>     
+                        <td>{{item.stu_height}}</td>     
+                        <td>{{item.stu_weight}}</td>
+                    </tr>
+                    <tr>
+                        <template v-if="addFlag" v-model="addItem">
+                        <td></td>                 
+                        <td></td> 
+                        <td> <input type="text" id="addNo"></td>
+                        <td> <input type="text" id="addName"></td>
+                        <td> <input type="text" id="addDept"></td>     
+                        <td> <input type="text" id="addGrade"></td>     
+                        <td> <input type="text" id="addHeight"></td>     
+                        <td> <input type="text" id="addWeight"></td>
+                        <td> <button @click="radd()" id="addfun">추가</button></td>
+                        </template>
+                    </tr>
+                </tbody>                   
+            </table>
+            <button @click="fnRemove()">삭제</button>
+            <button @click="fnAdd()">추가</button>
+        </div>
+    </div>      
+</body>
+</html>
+<script>
+    var app = new Vue({ 
+    el: '#app',
+    data: {
+        seen: true
+        , list : []
+        , keyword : ""
+        , searchTxt : ""
+        , selectItem : ""
+        , addFlag : false
+        , addItem : []
+        , checkList : []
+    }, methods: {
+        fnTest : function(){
+            var self = this;
+            $.ajax({
+                url:"js/MOCK_DATA2.json",
+                dataType:"json",
+                success:function(data) {
+                    self.list = data;
+                    
+            }
+        });          
+        }
+        , fnSearch : function(){
+            
+            this.selectItem = this.checkList;
+            console.log(this.checkList);
+            
+        }
+        , fnRemove : function(event){
+            for(var i = this.list.length-1 ; i >=0 ; i--) {
+                for(var j = 0 ; j < this.addItem.length; j++){
+                    if(this.list[i].stu_no == this.addItem[j]){
+                        this.list.push(addItem.value);
+                        break;
+                    }
+                }
+            }
+        }
+        , fnAdd : function () {
+            this.addFlag = true;
+
+        }
+
+        , radd : function() {
+
+            for(var i = 0 ; i < this.list.length ; i++) {
+                for(var j = 0 ; j < this.checkList.length; j++){
+                    if(this.list[i].stu_no == this.checkList[j]){
+                        this.list.splice(i,1);
+                        break;
+                    }
+                }
+            }
+
+        
+        }
+
+    }
+    , created: function () {
+		this.fnTest();
+	}
+});
+</script>

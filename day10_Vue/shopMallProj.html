@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        #container {
+            width: 1200px;
+            border: 1px solid #ccc;
+            margin: auto;
+            border-radius: 20px;
+        }
+
+        header {
+            
+        }
+
+        #banner {
+            
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin: 30px;
+            text-align: center;
+            line-height: 300px;
+        }
+
+        ul{
+            list-style: none;
+            display: grid;    
+            grid-template-columns: repeat(3,1fr);
+        }
+
+        #page {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 5px;
+            position: relative;
+            left: 800px;
+            top: -250px;
+        }
+
+        #search {
+            border: 0px solid #ccc;
+            position: relative;
+            left: 280px;
+            top: -100px;
+        }
+        
+    </style>
+
+</head>
+<body>
+
+    <div id="container"> 
+        <header >
+
+            <img src="images/java1.png" alt="logo" > 
+            <div id="search">
+                <input type="text" placeholder="검색해" size="30">
+                <button>검색</button>
+                <div>추천검색어 : 콜라 , 사이다 , 자바스크립트</div>
+                <button>장바구니</button>
+                <button>카테고리</button>
+            </div>
+            
+
+            <span id="page">
+                <a href="#">로그인</a>|
+                <a href="#">회원가입</a>|
+                <a href="#">고객센터</a>
+            </span>
+
+            <div id="banner">
+                배너다
+            </div>
+            <ul class="recommend">
+                <li class="r1">추천상품1 <img src="images/java2.png"> </li>
+                <li class="r2">추천상품2 <img src="images/java3.jpg"> </li>
+                <li class="r3">추천상품3 <img src="images/java4.png"> </li>
+            </ul>
+
+
+        </header>
+    </div>  
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+</head>
+<body>      
+    <div id="app">
+
+        <div> 
+            <input type="text" v-model="txt" @keyup.enter="fnAdd()"> <!-- 엔터치면 실행-->
+            <button @click="fnAdd()">추가</button> 
+        </div>
+        <div id="tt">{{txtAdd}}</div>
+
+    </div>      
+</body>
+</html>
+<script>
+    var app = new Vue({ 
+    el: '#app',
+    data: {
+        txtAdd : "",
+        txt : ""
+
+    }, methods: {
+
+        fnAdd : function (){
+
+           this.txtAdd = this.txtAdd + this.txt;
+           this.txt = "";
+            
+
+        },
+          
+    }
+    , created: function () {
+	
+	}
+});
+</script>

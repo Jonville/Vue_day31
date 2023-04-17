@@ -1,0 +1,48 @@
+<html>
+<head>
+    <link rel="stylesheet" href="index.css">
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+</head>
+<body>      
+    <div id="app">
+
+        <div>클릭 횟수 : {{cnt}}번 입니다. <button @click="test1">클릭!</button> </div>
+        <div id="btnevent">버튼 이벤트 2 <button @click="test2">클릭!</button> </div>
+        <div id="btnevent2"><button @click="test3">클릭하면 나올거야</button> </div>
+        <div id="content" style="display: none;" >메롱</div>
+
+    </div>      
+</body>
+</html>
+<script>
+    var app = new Vue({ 
+    el: '#app',
+    data: {
+        cnt : 0
+
+    }, methods: {
+        test1 : function (){
+
+            this.cnt = this.cnt + 1;
+
+        },
+
+        test2 : function (){
+
+            alert("안녕하세요");
+            var btnevent = document.getElementById("btnevent");
+            btnevent.style.color = "red";
+
+        },
+        test3 : function() {
+            document.getElementById("content").style.display="block";
+        }
+          
+    }
+    , created: function () {
+	
+	}
+});
+</script>
